@@ -1,5 +1,23 @@
 # Terraform Workshop
 
+## Preambule
+
+La suite de ce workshop/TP est ecrite en anglais, je ne l'ai pas copiee d'internet, ce n'est pas ChatGPT qui l'a generee.
+
+C'est un choix delibere, car dans le monde du travail, vous serez amenes a lire et ecrire de la documentation technique en anglais.
+
+Le documentation de Terraform que ce TP va vous faire utiliser a outrance est egalement disponible en anglais.
+
+La plupart des resources que vous trouverez pour vous aider (Issues GitHub, Forums terraform, Slacks...) sont egalement en anglais.
+
+:warning: Se limiter aux resources en francais c'est brider votre connaissance a une fraction infime de ce qui est disponible.
+
+Essayez de jouer le jeu, ne copiez collez pas betement dans ChatGPT ou Google Translate, ca ne traduira que les mots, pas mes intentions.
+
+Si l'anglais est vraiment un probleme insurmontable, alors demandez moi et je vous ecrirais les instructions en francais.
+
+## Introduction
+
 This workshop is intended to students of HETIC.
 
 In this workshop you will:
@@ -17,7 +35,9 @@ Follow the [official instructions](https://developer.hashicorp.com/terraform/ins
 
 ## Step 2 - Create a GitHub PAT
 
-:fast_forward: TL;DR: click here https://github.com/settings/tokens/new, skip to :arrow_forward:
+In order for Terraform to use your GitHub account as a provider, you need to provide it with some form of programatic access.
+
+There are multiple ways of doing this, but the Personal Access Token (PAT) is the one that you will generally use in a real job.
 
 Go to the [Settings page](https://github.com/settings/profile) (top right profile icon, then click on settings).
 
@@ -35,7 +55,7 @@ Token name: `tp1-terraform`
 
 Expiration: up to you
 
-:arrow_forward: Select scopes: select 
+Select scopes: select 
   - `repo` and it will automatically select all sub options too, grants full access to all repos
   - `read:org` to allow reading the global GitHub settings
 
@@ -43,7 +63,7 @@ Click on `Generate token`
 
 :warning: The token will be displayed only once ! Immediately copy it to a safe place (password manager, or `passwords.txt` on your desktop...)
 
-## Step 3 - Initialize Terraform
+## Step 3 - Expose the GitHub PAT
 
 For Terraform to be able to interact with GitHUb, we need to provide it our fresh PAT.
 
@@ -69,6 +89,8 @@ Windows: Press the windows key and search for `Environment Variables` In your pe
 
 Our PAT can be used for many things, including communicating with GitHub through the CLI tool they provide for automation.
 
+You can try to use your PAT with the GitHub command line utility (CLI).
+
 Install [GitHub CLI](https://github.com/cli/cli#installation) for your platform to automate interactions with GitHub.
 
 Try out `gh repo list HETIC-DevOps-2024`.
@@ -93,17 +115,29 @@ Once the resource is created, I want terraform to show the clone URL of the repo
 
 ### Instructions
 
-For this, all you will need the official documentation for the [`github_repository`](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository) resource.
+First of all, using `git`, clone this repository somewhere on your machine with the clone url `https://github.com/HETIC-DevOps-2024/tp1-terraform.git`.
+
+You can use the command line or any other graphical tool.
+
+Example: `git clone https://github.com/HETIC-DevOps-2024/tp1-terraform.git`
+
+For this workshop, all you will need the official documentation for the [`github_repository`](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository) resource.
 
 This is the only resource we will be using for this challenge.
 
-All the definitions should go in the `repo.tf` file, inside of the block:
+First in your terminal navigate inside the repository that you just cloned: `cd tp1-terraform`.
+
+Inside you will find a few files, but the most important one for now is `repo.tf`.
+
+All the definitions should go in the `repo.tf` file, inside of the resource block:
 
 ```hcl
 resource "github_repository" "repo" {
     add things here
 }
 ```
+
+First of all, you will have to run `terraform init` to initialize terraform with the GitHub provider.
 
 You will have to run `terraform plan`, `terraform apply` and `terraform destroy` multiple times turing the process.
 
