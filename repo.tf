@@ -3,18 +3,17 @@ resource "github_repository" "repo" {
   name                   = "test-repo"
   description            = var.repo_description
   # Challenge #1
-  visibility             = "private"
+  visibility             = "private"  # Repo is private
   #
   # Optional Warrior Challenge #2 
   # visibility             = "public"
-  allow_rebase_merge     = false
-  vulnerability_alerts   = true
-  delete_branch_on_merge = true
-  auto_init              = true
-  gitignore_template     = "Node"
-  license_template       = "mit"
-  has_wiki               = false
-  has_projects           = false
+  allow_rebase_merge     = false      # It does NOT allow rebase merge operations
+  delete_branch_on_merge = true       # Branches will be automatically deleted after a merge operation
+  has_wiki               = false      # It should NOT have a wiki
+  has_projects           = false      # It should NOT have projects
+  auto_init              = true       # Should be initialized with a README
+  gitignore_template     = "Node"     # a `.gitignore` file setup for a Node.JS project
+  license_template       = "mit"      # an `MIT` license
   # Trap #1
   # Will block terraform destroy completely
   # Good for prod, but disable it when setting things up
@@ -23,8 +22,9 @@ resource "github_repository" "repo" {
   #
   # Challenge #2 Trap: Deprecated ! RTFM
   # https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository#default_branch
+  # It will work but not for long
   #
-  # default_branch         = "WRONG!"
+  # default_branch         = "WRONG!" 
 }
 
 # Challenge #2 Trap
@@ -40,20 +40,20 @@ resource "github_repository" "repo" {
 # Right !
 # Create the branch first
 #
-resource "github_branch" "hetic" {
-  repository = github_repository.repo.name
-  branch     = "hetic"
-  # source_branch needed if the default branch is not main
-  source_branch = "master"
-}
+# resource "github_branch" "hetic" {
+#   repository = github_repository.repo.name
+#   branch     = "hetic"
+#   # source_branch needed if the default branch is not main
+#   source_branch = "master"
+# }
 
 # Challenge #2
 # Now set the default branch
 #
-resource "github_branch_default" "default" {
-  repository = github_repository.repo.name
-  branch     = github_branch.hetic.branch
-}
+# resource "github_branch_default" "default" {
+#   repository = github_repository.repo.name
+#   branch     = github_branch.hetic.branch
+# }
 
 # Branch protection doesn't work on private repos unless you 
 # give GitHub the $$$. Turn the repo public to allow it
