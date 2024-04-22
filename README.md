@@ -216,3 +216,7 @@ You might have to change things up...
 ## Optional Curiosity Challenge
 
 What do we need to do to convert our code to be compatible with [OpenTofu](https://opentofu.org/) ?
+
+## Cleanup
+
+Once the workshop over, delete the repo(s) that were created during the workshop, and remove the Personal Access Token from the [Tokens (classic) list](https://github.com/settings/tokens).

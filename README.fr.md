@@ -203,3 +203,7 @@ Il faudra surement changer certaines choses que vous avez deja faites...
 ## Challenge Curiosite
 
 Que devons nous faire pour convertir notre code pour etre compatible avec [OpenTofu](https://opentofu.org/) ?
+
+## Nettoyage
+
+Une fois le TP termine, supprimez le ou les repos que vous avez cree pendant le TP, ainsi que le Personal Access Token de la [liste des tokens (classic)](https://github.com/settings/tokens).
